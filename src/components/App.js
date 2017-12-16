@@ -6,19 +6,28 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state={
-      newDate:"1990-03-29",
-      birthday:"1990-03-29"
+      newDate:"",
+      birthday:"",
+      showStats:false
     };
   }
 
   changeDate(){
     console.log(this.state.newDate);
     this.setState({
-      birthday:this.state.newDate
+      birthday:this.state.newDate,
+      showStats:true
     });
   }
 
   render(){
+
+    let ageStats=(<div></div>);
+
+    if(this.state.showStats){
+      ageStats=(<AgeStats date={this.state.birthday} />)
+    }
+
     return(
       <div className="App">
         <Form inline>
@@ -29,7 +38,7 @@ class App extends Component{
           </FormControl>
           {' '}
           <Button onClick={()=>this.changeDate()}>Submit</Button>
-          <AgeStats date={this.state.birthday} />
+          {ageStats}
         </Form>
       </div>
     )
